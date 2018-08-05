@@ -1,0 +1,13 @@
+{
+  "name": "tunes",
+  "version": "1.0.0",
+  "description": "A clone of the itunes top charts",
+  "author": "Anjali Kumar <anjaliswat@gmail.com>",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.87.0",
+    "requests": "^0.2.2"
+  }
+}
