@@ -11,7 +11,15 @@ class SongsPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/tunes')
+    let path;
+
+    if(process.env.NODE_ENV === 'development') {
+      path = 'http://localhost:3000/tunes';
+    } else {
+      path='/tunes';
+    }
+
+    fetch('http://localhost:3000/tunes')
       .then(response => response.json())
       .then((data) => {
         const songs = data.feed.results;
