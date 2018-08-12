@@ -11,7 +11,7 @@ class SongsPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/tunes')
+    fetch('/tunes')
       .then(response => response.json())
       .then((data) => {
         const songs = data.feed.results;
