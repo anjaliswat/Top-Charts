@@ -16,7 +16,7 @@ class SongsPage extends React.Component {
     if (process.env.NODE_ENV === 'development') {
       path = 'http://localhost:3000/tunes';
     } else {
-      path= '/tunes';
+      path = '/tunes';
     }
 
     fetch(path)
