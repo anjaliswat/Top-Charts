@@ -1,4 +1,5 @@
 import React from 'react';
+import Song from './Song';
 import './style.css';
 
 class SongsPage extends React.Component {
@@ -13,6 +14,10 @@ class SongsPage extends React.Component {
     fetch('http://localhost:3000/tunes')
       .then(response => response.json())
       .then((data) => {
+        const songs = data.feed.results;
+        songs.forEach((song, i) => {
+          song.rank = i + 1;
+        });
         this.setState({ songs: data.feed.results });
       });
   }
@@ -55,30 +60,8 @@ class SongsPage extends React.Component {
 
           <tbody>
             {
-              songs.map((song, index) => (
-                <tr key={song.id}>
-                  <td>
-                    {index + 1}
-                  </td>
-                  <td>
-                    <img alt="artwork" className="art-work" src={song.artworkUrl100} />
-                  </td>
-                  <td>
-                    {song.name}
-                  </td>
-                  <td>
-                    {song.artistName}
-                  </td>
-                  <td>
-                    {song.collectionName}
-                  </td>
-                  <td>
-                    3:35
-                  </td>
-                  <td>
-                    $1.78
-                  </td>
-                </tr>
+              songs.map(song => (
+                <Song song={song} key={song.id} />
               ))
             }
           </tbody>
