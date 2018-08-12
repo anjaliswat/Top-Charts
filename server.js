@@ -4,6 +4,8 @@ const path = require('path')
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use((req, res, next) => {
@@ -18,6 +20,6 @@ app.get('/tunes', (req,res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('Listening on port 3000');
 });
