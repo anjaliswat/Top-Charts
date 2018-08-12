@@ -6,7 +6,8 @@
   "license": "ISC",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --mode=development",
+    "start": "node server.js",
+    "serve": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production"
   },
   "dependencies": {
