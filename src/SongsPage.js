@@ -1,6 +1,7 @@
 import React from 'react';
 import Song from './Song';
 import './style.css';
+import TableHeader from './TableHeader';
 
 class SongsPage extends React.Component {
   constructor(props) {
@@ -41,28 +42,13 @@ class SongsPage extends React.Component {
         <table className="top-songs">
           <thead>
             <tr>
+              <TableHeader name="" />
               <th />
-
-              <th>
-                Name
-              </th>
-
-              <th>
-                Artist
-              </th>
-
-              <th>
-                Album
-              </th>
-
-              <th>
-                Time
-              </th>
-
-              <th>
-                Price
-              </th>
-
+              <TableHeader name="Name" />
+              <TableHeader name="Artist" />
+              <TableHeader name="Album" />
+              <TableHeader name="Time" />
+              <TableHeader name="Price" />
             </tr>
           </thead>
 
