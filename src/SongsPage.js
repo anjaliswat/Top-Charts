@@ -8,7 +8,10 @@ class SongsPage extends React.Component {
     super(props);
     this.state = {
       songs: [],
+      sortBy: null,
     };
+
+    this.handleHeaderClick = this.handleHeaderClick.bind(this);
   }
 
   componentDidMount() {
@@ -31,8 +34,15 @@ class SongsPage extends React.Component {
       });
   }
 
+  handleHeaderClick(name) {
+    const { sortBy } = this.state;
+    this.setState({ sortBy: name });
+    console.log(sortBy);
+    console.log(name);
+  }
+
   render() {
-    const { songs } = this.state;
+    const { songs, sortBy } = this.state;
 
     return (
       <div>
@@ -42,13 +52,13 @@ class SongsPage extends React.Component {
         <table className="top-songs">
           <thead>
             <tr>
-              <TableHeader name="" />
+              <TableHeader name="" setSortedColumn={this.handleHeaderClick} sorted={sortBy === ''} />
               <th />
-              <TableHeader name="Name" />
-              <TableHeader name="Artist" />
-              <TableHeader name="Album" />
-              <TableHeader name="Time" />
-              <TableHeader name="Price" />
+              <TableHeader name="Name" setSortedColumn={this.handleHeaderClick} sorted={sortBy === 'Name'} />
+              <TableHeader name="Artist" setSortedColumn={this.handleHeaderClick} sorted={sortBy === 'Artist'} />
+              <TableHeader name="Album" setSortedColumn={this.handleHeaderClick} sorted={sortBy === 'Album'} />
+              <TableHeader name="Time" setSortedColumn={this.handleHeaderClick} sorted={sortBy === 'Time'} />
+              <TableHeader name="Price" setSortedColumn={this.handleHeaderClick} sorted={sortBy === 'Price'} />
             </tr>
           </thead>
 

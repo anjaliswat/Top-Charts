@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class TableHeader extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       arrow: null,
     };
@@ -12,16 +11,28 @@ class TableHeader extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    const { arrow } = this.state;
-    let newArrow = '▼';
+  componentDidUpdate(prevProps) {
+    const { sorted } = this.props;
 
-    if (arrow === '▼') {
-      newArrow = '▲';
-    } else if (arrow === '▲') {
-      newArrow = '▼';
+    if (prevProps.sorted !== sorted) {
+      let newArrow = '▼';
+
+      if (sorted) {
+        newArrow = '▼';
+      }
+
+      this.setState({ arrow: newArrow });
     }
-    this.setState({ arrow: newArrow });
+    console.log(prevProps.sorted);
+    console.log(sorted);
+  }
+
+  handleClick(name) {
+    const { setSortedColumn } = this.props;
+
+    return () => {
+      setSortedColumn(name);
+    };
   }
 
   render() {
@@ -29,7 +40,7 @@ class TableHeader extends React.Component {
     const { arrow } = this.state;
 
     return (
-      <th onClick={this.handleClick} className="table-header">
+      <th onClick={this.handleClick(name)} className="table-header">
         <span className="name">
           {name}
         </span>
@@ -43,6 +54,8 @@ class TableHeader extends React.Component {
 
 TableHeader.propTypes = {
   name: PropTypes.string.isRequired,
+  setSortedColumn: PropTypes.func.isRequired,
+  sorted: PropTypes.bool.isRequired,
 };
 
 export default TableHeader;
