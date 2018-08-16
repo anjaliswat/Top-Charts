@@ -3,12 +3,21 @@ import Song from './Song';
 import './style.css';
 import TableHeader from './TableHeader';
 
+function compareFunction(property) {
+  return (a, b) => {
+    if (a[property].toString().toLowerCase() < b[property].toString().toLowerCase()) {
+      return -1;
+    }
+    return 1;
+  };
+}
+
 class SongsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       songs: [],
-      sortBy: null,
+      sortBy: '',
     };
 
     this.handleHeaderClick = this.handleHeaderClick.bind(this);
@@ -35,10 +44,24 @@ class SongsPage extends React.Component {
   }
 
   handleHeaderClick(name) {
-    const { sortBy } = this.state;
-    this.setState({ sortBy: name });
-    console.log(sortBy);
-    console.log(name);
+    const { songs } = this.state;
+
+    switch (name) {
+      case 'Name':
+        songs.sort(compareFunction('name'));
+        break;
+      case 'Artist':
+        songs.sort(compareFunction('artistName'));
+        break;
+      case 'Album':
+        songs.sort(compareFunction('collectionName'));
+        break;
+      default:
+        songs.sort((a, b) => a.rank - b.rank);
+        break;
+    }
+
+    this.setState({ songs, sortBy: name });
   }
 
   render() {

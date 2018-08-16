@@ -5,26 +5,8 @@ class TableHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrow: null,
     };
-
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { sorted } = this.props;
-
-    if (prevProps.sorted !== sorted) {
-      let newArrow = '▼';
-
-      if (sorted) {
-        newArrow = '▼';
-      }
-
-      this.setState({ arrow: newArrow });
-    }
-    console.log(prevProps.sorted);
-    console.log(sorted);
   }
 
   handleClick(name) {
@@ -37,7 +19,13 @@ class TableHeader extends React.Component {
 
   render() {
     const { name } = this.props;
-    const { arrow } = this.state;
+    const { sorted } = this.props;
+
+    let arrow = '';
+
+    if (sorted) {
+      arrow = '▲';
+    }
 
     return (
       <th onClick={this.handleClick(name)} className="table-header">
