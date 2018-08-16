@@ -43,7 +43,7 @@ class SongsPage extends React.Component {
       });
   }
 
-  handleHeaderClick(name) {
+  handleHeaderClick(name, ascending) {
     const { songs } = this.state;
 
     switch (name) {
@@ -59,6 +59,10 @@ class SongsPage extends React.Component {
       default:
         songs.sort((a, b) => a.rank - b.rank);
         break;
+    }
+
+    if (!ascending) {
+      songs.reverse();
     }
 
     this.setState({ songs, sortBy: name });

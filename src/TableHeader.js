@@ -5,26 +5,34 @@ class TableHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      ascending: true,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(name) {
-    const { setSortedColumn } = this.props;
+    const { setSortedColumn, sorted } = this.props;
+    const { ascending } = this.state;
 
     return () => {
-      setSortedColumn(name);
+      const newAscending = sorted ? !ascending : true;
+      this.setState({ ascending: newAscending });
+      setSortedColumn(name, newAscending);
     };
   }
 
   render() {
-    const { name } = this.props;
-    const { sorted } = this.props;
+    const { name, sorted } = this.props;
+    const { ascending } = this.state;
 
     let arrow = '';
 
     if (sorted) {
-      arrow = '▲';
+      if (ascending) {
+        arrow = '▲';
+      } else {
+        arrow = '▼';
+      }
     }
 
     return (
